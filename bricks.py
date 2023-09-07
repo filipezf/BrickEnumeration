@@ -32,7 +32,7 @@ q[0] = 1
 def sqrt(c): return math.sqrt(c)
 S2, S3, S5, S7, S11 = sqrt(2), sqrt(3), sqrt(5), sqrt(7),sqrt(11)
 
-z=0
+
 
 """This function calculates a unique hash that is invariant under rotations and mirrors (if wanted).
 It achieve this by getting the x,y,z-distance of each brick to the center of mass and 
@@ -117,19 +117,26 @@ def add(lst, added, free_points, occupied):
                addPiece(p, q, h,piece[1], piece[0])
 
                  
-# Print the obtained permutations 
+
+# function to add to hash list all configurations obtainable from a given list of bricks
+# You put brick B0 at origin, then attach B1 on it, then B2 on these, and so on
+# => there are lots of speed-ups possible here
 
 def calc(perm1):               
     for i in set(perm1):
         lst = [ (0,0,0)]
         add(list(i), [], set(lst), set())
 
+#finally, we start at a empty set of hashes and iterate over all possible permutations
+
 for perm1 in perm:
     z = set(perm1)
     n = len(hashes) 
     calc(z)
     print (len(hashes)-n, list(z)[0])
+    
 
+# uncomment to list all hashes
 #for i in hashes:
 #    print (i)
-print (len(hashes))
+print (len(hashes))   # how many configurations there are in total?
